@@ -41,13 +41,3 @@ export function createPersona(persona) {
 //     });
 //   };
 // }
-
-// export function getTypes() {
-//   return async function (dispatch) {
-//     const pokemons = await axios.get(`http://localhost:3001/types`);
-//     return dispatch({
-//       type: GET_TYPES,
-//       payload: pokemons.data,
-//     });
-//   };
-// }

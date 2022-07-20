@@ -51,24 +51,3 @@ export function createPersona(persona) {
 //     });
 //   };
 // }
-
-// export function getPokemon(id) {
-//   return async function (dispatch) {
-//     const pokemon = await axios.get(`http://localhost:3001/pokemons/${id}`);
-//     return dispatch({
-//       type: GET_DETAIL,
-//       payload: pokemon.data,
-//     });
-//   };
-// }
-
-// export function createPokemon(estado) {
-//   return async function (dispatch) {
-//     var info = await axios.post(`http://localhost:3001/pokemons`, estado);
-//     console.log(info.data);
-//     return dispatch({
-//       type: CREATE_POKEMON,
-//       payload: info.data,
-//     });
-//   };
-// }

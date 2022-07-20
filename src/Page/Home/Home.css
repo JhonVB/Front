@@ -1,0 +1,8 @@
+.contenedorTabla {
+  display: flex;
+  width: 86rem;
+  height: 40rem;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}

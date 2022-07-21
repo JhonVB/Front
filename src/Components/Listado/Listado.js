@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { eliminarPersona, actualizarPersona } from "../../Redux/actions";
-import { Table, Popconfirm, Form, Input, Button } from "antd";
+import {
+  Table,
+  Popconfirm,
+  Form,
+  Input,
+  Button,
+  Select,
+  Col,
+  Row,
+  Typography,
+} from "antd";
 import { useDispatch } from "react-redux";
-import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
+import {
+  DeleteTwoTone,
+  EditTwoTone,
+  CloseCircleTwoTone,
+  CheckCircleTwoTone,
+} from "@ant-design/icons";
 import "antd/dist/antd.css";
 import "./Listado.css";
 
@@ -11,56 +26,28 @@ function Listado({ personas }) {
   const [row, setRow] = useState(null);
   const [form] = Form.useForm();
 
+  const isEditing = (record) => record.id === row;
+
   const handleDelete = (id) => {
     dispatch(eliminarPersona(id));
-    console.log(id);
+  };
+
+  const edit = (record) => {
+    setRow(record.id);
+    form.setFieldsValue({
+      type_document: record.type_document,
+      document: record.document,
+      hobbie: record.hobbie,
+      last_name: record.last_name,
+      name: record.name,
+    });
+  };
+
+  const cancel = () => {
+    setRow(null);
   };
 
   const columns = [
-    {
-      title: "Type Document",
-      dataIndex: "type_document",
-      key: "type_document",
-      align: "center",
-      render: (text, record) => {
-        if (row == record.id) {
-          return (
-            <Form.Item
-              name="type_document"
-              rules={[
-                { required: true, message: "Please Enter you type document" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          );
-        } else {
-          return <p>{text}</p>;
-        }
-      },
-    },
-    {
-      title: "Document",
-      dataIndex: "document",
-      key: "document",
-      align: "center",
-      render: (text, record) => {
-        if (row == record.id) {
-          return (
-            <Form.Item
-              name="document"
-              rules={[
-                { required: true, message: "Please Enter you  document" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          );
-        } else {
-          return <p>{text}</p>;
-        }
-      },
-    },
     {
       title: "Name",
       dataIndex: "name",
@@ -71,7 +58,7 @@ function Listado({ personas }) {
           return (
             <Form.Item
               name="name"
-              rules={[{ required: true, message: "Please Enter you  name" }]}
+              rules={[{ required: true, message: "Please Enter your  name" }]}
             >
               <Input />
             </Form.Item>
@@ -93,7 +80,59 @@ function Listado({ personas }) {
             <Form.Item
               name="last_name"
               rules={[
-                { required: true, message: "Please Enter you last name" },
+                { required: true, message: "Please Enter your last name" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          );
+        } else {
+          return <p>{text}</p>;
+        }
+      },
+    },
+    {
+      title: "Type Document",
+      dataIndex: "type_document",
+      key: "type_document",
+      align: "center",
+      render: (text, record) => {
+        if (row == record.id) {
+          return (
+            <Form.Item
+              name="type_document"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select your type document!",
+                },
+              ]}
+            >
+              <Select style={{ width: 100 }}>
+                <Select.Option value="T.I">T.I</Select.Option>
+                <Select.Option value="C.C.">C.C</Select.Option>
+                <Select.Option value="DNI">DNI</Select.Option>
+                <Select.Option value="OTRO">Otro</Select.Option>
+              </Select>
+            </Form.Item>
+          );
+        } else {
+          return <p>{text}</p>;
+        }
+      },
+    },
+    {
+      title: "Document",
+      dataIndex: "document",
+      key: "document",
+      align: "center",
+      render: (text, record) => {
+        if (row == record.id) {
+          return (
+            <Form.Item
+              name="document"
+              rules={[
+                { required: true, message: "Please Enter your  document" },
               ]}
             >
               <Input />
@@ -114,10 +153,18 @@ function Listado({ personas }) {
         if (row == record.id) {
           return (
             <Form.Item
+              label="Hobbie:"
               name="hobbie"
-              rules={[{ required: true, message: "Please Enter you hobbie" }]}
+              rules={[
+                { required: true, message: "Please select your hobbie!" },
+              ]}
             >
-              <Input />
+              <Select style={{ width: 100 }}>
+                <Select.Option value="Correr">Correr</Select.Option>
+                <Select.Option value="Bailar">Bailar</Select.Option>
+                <Select.Option value="Cantar">Cantar</Select.Option>
+                <Select.Option value="Otro">Otro</Select.Option>
+              </Select>
             </Form.Item>
           );
         } else {
@@ -128,38 +175,46 @@ function Listado({ personas }) {
     {
       title: "Actions",
       key: "acciones",
+      align: "center",
+      render: (_, record) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Button type="link" htmlType="submit">
+              <CheckCircleTwoTone
+                style={{ fontSize: "1.3rem" }}
+                twoToneColor="#06bee1"
+              />
+            </Button>
 
-      render: (_, record) => (
-        <>
-          <EditTwoTone
-            twoToneColor="#48cae4"
-            style={{ fontSize: "1.3rem" }}
-            onClick={() => {
-              setRow(record.id);
-              form.setFieldsValue({
-                type_document: record.type_document,
-                document: record.document,
-                hobbie: record.hobbie,
-                last_name: record.last_name,
-                name: record.name,
-              });
-            }}
-          />
-
-          <Popconfirm
-            title="Sure to delete?"
-            onConfirm={() => handleDelete(record.id)}
-          >
-            <DeleteTwoTone
-              twoToneColor="#eb2f96"
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <CloseCircleTwoTone
+                twoToneColor="#e71d36"
+                style={{ fontSize: "1.3rem" }}
+              />
+            </Popconfirm>
+          </span>
+        ) : (
+          <>
+            <EditTwoTone
+              disabled={row !== null}
+              twoToneColor="#06bee1"
+              onClick={() => edit(record)}
               style={{ fontSize: "1.3rem" }}
-            />
-          </Popconfirm>
-          <Button type="link" htmlType="submit">
-            Save
-          </Button>
-        </>
-      ),
+            ></EditTwoTone>
+
+            <Popconfirm
+              title="Sure to delete?"
+              onConfirm={() => handleDelete(record.id)}
+            >
+              <DeleteTwoTone
+                twoToneColor="#e71d36"
+                style={{ fontSize: "1.3rem" }}
+              />
+            </Popconfirm>
+          </>
+        );
+      },
     },
   ];
 

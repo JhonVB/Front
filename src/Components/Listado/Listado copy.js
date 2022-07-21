@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { eliminarPersona, actualizarPersona } from "../../Redux/actions";
 import { Table, Popconfirm, Form, Input, Button } from "antd";
 import { useDispatch } from "react-redux";

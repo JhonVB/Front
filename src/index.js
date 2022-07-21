@@ -5,6 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./Redux/store";
 import { Provider } from "react-redux";
+import axios from "axios";
+// import customAxios from "../src/Service/Service";
+
+// axios.interceptors.request.use((request) => {
+//   console.log("request", request);
+//   return request;
+// });
+
+// customAxios.interceptors.response.use((response) => {
+//   console.log("response", response);
+//   return response;
+// });
 
 ReactDOM.render(
   <Provider store={store}>

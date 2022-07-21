@@ -1,7 +1,13 @@
-import { GET_PERSONAS, CREATE_PERSONA } from "./actionsTypes";
+import {
+  GET_PERSONAS,
+  CREATE_PERSONA,
+  DELETE_PERSONA,
+  UPDATE_PERSONA,
+} from "./actionsTypes";
 
 const initialState = {
   personas: [],
+  errors: {},
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -13,16 +19,29 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case CREATE_PERSONA:
+      if (!action.payload.isError) {
+        return {
+          ...state,
+          personas: [...state.personas, action.payload],
+        };
+      }
+
+    case DELETE_PERSONA:
       return {
         ...state,
-        personas: [...state.personas, action.payload],
+        personas: action.payload,
       };
 
-    //  case DELETE_PERSONA:
-    //    return {
-    //      ...state,
-    //      personas: action.payload,
-    //    };
+    case UPDATE_PERSONA:
+      const person = state.personas.findIndex(
+        ({ id }) => id === action.payload.id
+      );
+      state.personas[person] = action.payload;
+
+      return {
+        ...state,
+        personas: [...state.personas],
+      };
 
     default:
       return {

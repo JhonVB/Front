@@ -18,7 +18,7 @@ function Home() {
       <Link to="/create">
         <button>CREAR NUEVA PERSONA</button>
       </Link>
-      <Listado personas={personas} />
+      {personas.length > 0 ? <Listado personas={personas} /> : null}
     </div>
   );
 }

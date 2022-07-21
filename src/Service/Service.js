@@ -1,4 +1,5 @@
 import axios from "axios";
+import { notification } from "antd";
 
 const customAxios = axios.create({
   baseURL: `http://localhost:8000/api`,
@@ -14,7 +15,13 @@ const requestHandler = (request) => {
 };
 
 const responseHandler = (response) => {
-  console.log("response", response);
+  console.log(response);
+  // if (error.response.status === 400) {
+  //   notification["error"]({
+  //     message: "Error",
+  //     description: "Hubo un problema en la acción realizada.",
+  //   });
+  // }
   return response;
 };
 
@@ -22,14 +29,11 @@ const errorHandler = (error) => {
   console.log("este si", error);
 
   if (error.response.status === 400) {
-    console.log("si entra");
-    let msg = "";
-    for (const [key, value] of Object.entries(error.response.data)) {
-      msg += `${value} \n`;
-    }
-    alert(msg);
+    notification["error"]({
+      message: "Error",
+      description: "Hubo un problema en la acción realizada.",
+    });
   }
-
   return Promise.reject(error);
 };
 

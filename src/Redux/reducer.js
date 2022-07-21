@@ -3,6 +3,7 @@ import {
   CREATE_PERSONA,
   DELETE_PERSONA,
   UPDATE_PERSONA,
+  CREATE_PERSONA_ERROR,
 } from "./actionsTypes";
 
 const initialState = {
@@ -19,12 +20,16 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case CREATE_PERSONA:
-      if (!action.payload.isError) {
-        return {
-          ...state,
-          personas: [...state.personas, action.payload],
-        };
-      }
+      return {
+        ...state,
+        personas: [...state.personas, action.payload],
+      };
+
+    case CREATE_PERSONA_ERROR:
+      return {
+        ...state,
+        errors: action.payload,
+      };
 
     case DELETE_PERSONA:
       return {

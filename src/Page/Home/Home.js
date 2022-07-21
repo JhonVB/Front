@@ -4,6 +4,7 @@ import { getPersonas } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 import Listado from "../../Components/Listado/Listado";
 import "./Home.css";
+import { Col, Row } from "antd";
 
 function Home() {
   const dispatch = useDispatch();
@@ -14,10 +15,15 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <div className="contenedorTabla">
-      <Link to="/create">
-        <button>CREAR NUEVA PERSONA</button>
-      </Link>
+    <div className="">
+      <Row type="flex" justify="space-between" align="top">
+        <Col sm={3} offset={10}>
+          <Link to="/create">
+            <button>CREAR NUEVA PERSONA</button>
+          </Link>
+        </Col>
+      </Row>
+
       {personas.length > 0 ? <Listado personas={personas} /> : null}
     </div>
   );

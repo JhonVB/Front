@@ -11,28 +11,25 @@ function Formulario() {
   const dispatch = useDispatch();
   const navegador = useNavigate();
 
-  const errores = useSelector((state) => state.personas);
+  const errores = useSelector((state) => state.errors);
 
   console.log(errores);
 
   useEffect(() => {
-    if (errores.isError) {
-      const errorFormate = Object.entries(errores.errors).map(
-        ([name, value]) => ({
-          name,
-          touched: true,
-          errors: value,
-        })
-      );
+    if (Object.keys(errores).length > 0) {
+      const errorFormate = Object.entries(errores).map(([name, value]) => ({
+        name,
+        touched: true,
+        errors: value,
+      }));
       console.log("errorFormate", errorFormate);
-
       form.setFields(errorFormate);
     }
   }, [form, errores]);
 
   const onFinish = (values) => {
-    dispatch(createPersona(values));
-    if (errores.error.length === 0) form.resetFields();
+    const clear = () => form.resetFields();
+    dispatch(createPersona(values, clear));
   };
 
   const onFinishFailed = (errorInfo) => {

@@ -16,19 +16,22 @@ const requestHandler = (request) => {
 
 const responseHandler = (response) => {
   console.log(response);
-  // if (error.response.status === 400) {
-  //   notification["error"]({
-  //     message: "Error",
-  //     description: "Hubo un problema en la acción realizada.",
-  //   });
-  // }
+  if (
+    response.status >= 200 &&
+    response.status <= 299 &&
+    response.config.method !== "get"
+  ) {
+    notification["success"]({
+      message: "Success",
+      description: "Tarea realizada con exito",
+    });
+  }
   return response;
 };
 
 const errorHandler = (error) => {
   console.log("este si", error);
-
-  if (error.response.status === 400) {
+  if (error.response.status >= 400 && error.response.status <= 499) {
     notification["error"]({
       message: "Error",
       description: "Hubo un problema en la acción realizada.",

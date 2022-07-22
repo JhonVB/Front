@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { eliminarPersona, actualizarPersona } from "../../Redux/actions";
 import {
   Table,
@@ -7,8 +7,6 @@ import {
   Input,
   Button,
   Select,
-  Col,
-  Row,
   Typography,
 } from "antd";
 import { useDispatch } from "react-redux";
@@ -18,8 +16,6 @@ import {
   CloseCircleTwoTone,
   CheckCircleTwoTone,
 } from "@ant-design/icons";
-import "antd/dist/antd.css";
-import "./Listado.css";
 
 function Listado({ personas }) {
   const dispatch = useDispatch();
@@ -132,7 +128,11 @@ function Listado({ personas }) {
             <Form.Item
               name="document"
               rules={[
-                { required: true, message: "Please Enter your  document" },
+                { required: true, message: "Please input your document!" },
+                {
+                  pattern: RegExp(/^\d{1,100}$/g),
+                  message: "Solo se permiten numeros enteros",
+                },
               ]}
             >
               <Input />

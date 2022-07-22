@@ -19,7 +19,6 @@ const requestHandler = (request) => {
 };
 
 const responseHandler = (response) => {
-  console.log("response", response);
   if (
     response.status >= 200 &&
     response.status <= 299 &&
@@ -35,11 +34,26 @@ const responseHandler = (response) => {
 
 const errorHandler = (error) => {
   console.log("errores", error);
-  if (error.response.status >= 400 && error.response.status <= 499) {
-    notification["error"]({
-      message: "Error",
-      description: "Hubo un problema en la acción realizada.",
+
+  const notificacion = () => {
+    return notification["error"]({
+      message: "Usuario incorrecto",
+      description: "Nombre: usuario1 , Contraseña: 12345",
     });
+  };
+
+  if (error.response.status == 401 && localStorage.getItem("token") === null) {
+  } else if (error.response.status == 401) {
+    notificacion();
+  } else {
+    notificacion();
+    setTimeout(() => {
+      window.location = "http://localhost:3000";
+    }, 2500);
+  }
+
+  if (error.response.status > 401 && error.response.status <= 499) {
+    notificacion();
   }
   return Promise.reject(error);
 };

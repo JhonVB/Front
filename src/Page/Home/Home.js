@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPersonas } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 import Listado from "../../Components/Listado/Listado";
-import "./Home.css";
-import { Col, Row } from "antd";
+import { Col, Row, Button } from "antd";
 
 function Home() {
   const dispatch = useDispatch();
@@ -16,10 +15,12 @@ function Home() {
 
   return (
     <div className="">
-      <Row type="flex" justify="space-between" align="top">
-        <Col sm={3} offset={10}>
+      <Row type="flex" justify="center" align="top" j>
+        <Col sm={3} offset={10} style={{ margin: 15 }}>
           <Link to="/create">
-            <button>CREAR NUEVA PERSONA</button>
+            <Button type="primary" shape="round" style={{ width: 200 }}>
+              Create Persona
+            </Button>
           </Link>
         </Col>
       </Row>

@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { Button, Form, Input, Select, Divider, Row, Col, message } from "antd";
 import { createPersona } from "../../Redux/actions";
 import "antd/dist/antd.css";
+import { Typography } from "antd";
 
 function Formulario() {
+  const { Title } = Typography;
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -36,8 +38,13 @@ function Formulario() {
 
   return (
     <div className="contendedor">
-      <Row type="flex" justify="center" align="top">
-        <Col span={3.5} style={{ margin: 18 }}>
+      <Row
+        type="flex"
+        justify="center"
+        align="top"
+        style={{ backgroundColor: "#e0e1dd" }}
+      >
+        <Col xl={5} style={{ margin: 18 }}>
           <Link to="/home">
             <Button type="primary" shape="round" style={{ width: 200 }}>
               Go to home!
@@ -46,13 +53,26 @@ function Formulario() {
         </Col>
       </Row>
 
-      <Divider style={{ color: "blue" }}>CREANDO PERSONAJE</Divider>
+      <Row justify="center" align="center" type="flex">
+        <Col xl={5} style={{ marginTop: 25 }}>
+          <Title
+            style={{
+              color: "#0582ca",
+              fontWeight: "700",
+              fontFamily: "sans-serif",
+              fontSize: "2.5rem",
+            }}
+          >
+            CREACIÓN
+          </Title>
+        </Col>
+      </Row>
 
       <Row justify="center" align="top" type="flex">
-        <Col span={9}>
+        <Col span={24}>
           <Form
             name="basic"
-            labelCol={{ span: 5 }}
+            labelCol={{ span: 9 }}
             wrapperCol={{ span: 16 }}
             initialValues={{ remember: true }}
             onFinish={onFinish}
@@ -61,7 +81,7 @@ function Formulario() {
             form={form}
           >
             <Form.Item
-              label="Name:"
+              label="Nombre: "
               name="name"
               rules={[{ required: true, message: "Please input your name!" }]}
             >
@@ -69,7 +89,7 @@ function Formulario() {
             </Form.Item>
 
             <Form.Item
-              label="Last Name:"
+              label="Apellido: "
               name="last_name"
               rules={[
                 { required: true, message: "Please input your last name!" },
@@ -79,7 +99,7 @@ function Formulario() {
             </Form.Item>
 
             <Form.Item
-              label="Document"
+              label="Documento: "
               name="document"
               rules={[
                 { required: true, message: "Please input your document!" },
@@ -93,7 +113,7 @@ function Formulario() {
             </Form.Item>
 
             <Form.Item
-              label="Type Document:"
+              label="Tipo de documento: "
               name="type_document"
               rules={[
                 { required: true, message: "Please input your type document!" },
@@ -108,7 +128,7 @@ function Formulario() {
             </Form.Item>
 
             <Form.Item
-              label="Hobbie:"
+              label="Hobbie: "
               name="hobbie"
               rules={[{ required: true, message: "Please input your hobbie!" }]}
             >

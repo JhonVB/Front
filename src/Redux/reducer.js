@@ -42,7 +42,6 @@ export default function rootReducer(state = initialState, action) {
         ({ id }) => id === action.payload.id
       );
       state.personas[person] = action.payload;
-
       return {
         ...state,
         personas: [...state.personas],

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Input, Col, Row } from "antd";
-import { useDispatch, useSelector, useEffect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logear } from "../../Redux/actions";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "antd";

@@ -12,9 +12,6 @@ const customAxios = axios.create({
 });
 
 const requestHandler = (request) => {
-  // Token will be dynamic so we can use any app-specific way to always
-  // fetch the new token before making the call
-  console.log("request", request);
   return request;
 };
 
@@ -33,28 +30,23 @@ const responseHandler = (response) => {
 };
 
 const errorHandler = (error) => {
-  console.log("errores", error);
-
-  const notificacion = () => {
-    return notification["error"]({
-      message: "Usuario incorrecto",
-      description: "Nombre: usuario1 , Contraseña: 12345",
-    });
-  };
-
-  if (error.response.status == 401 && localStorage.getItem("token") === null) {
-  } else if (error.response.status == 401) {
-    notificacion();
-  } else {
-    notificacion();
-    setTimeout(() => {
-      window.location = "http://localhost:3000";
-    }, 2500);
-  }
-
   if (error.response.status > 401 && error.response.status <= 499) {
-    notificacion();
+    notification["error"]({
+      message: "Error",
+      description: "Hubo un problema en la acción realizada",
+    });
   }
+
+  if (
+    error.response.status === 401 &&
+    localStorage.getItem("token").length === 0
+  ) {
+    notification["error"]({
+      message: "Error ",
+      description: "Debes iniciar sesion / Usuario: usuario1 , Clave: 12345 ",
+    });
+  }
+
   return Promise.reject(error);
 };
 

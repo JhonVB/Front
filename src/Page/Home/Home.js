@@ -12,12 +12,13 @@ function Home() {
   const personas = useSelector((state) => state.personas);
 
   const cerrarSesion = () => {
-    localStorage.setItem("token", null);
+    localStorage.setItem("token", "");
     navigate("/");
   };
 
   useEffect(() => {
     dispatch(getPersonas());
+    if (localStorage.getItem("token").length === 0) navigate("/");
   }, [dispatch]);
 
   return (

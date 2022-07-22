@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Button, Form, Input, Select, Divider, Row, Col, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Form, Input, Select, Row, Col } from "antd";
 import { createPersona } from "../../Redux/actions";
 import "antd/dist/antd.css";
 import { Typography } from "antd";
@@ -10,10 +10,9 @@ function Formulario() {
   const { Title } = Typography;
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const errores = useSelector((state) => state.errors);
-
-  console.log(errores);
 
   useEffect(() => {
     if (Object.keys(errores).length > 0) {
@@ -25,6 +24,7 @@ function Formulario() {
       console.log("errorFormate", errorFormate);
       form.setFields(errorFormate);
     }
+    if (localStorage.getItem("token").length === 0) navigate("/");
   }, [form, errores]);
 
   const onFinish = (values) => {

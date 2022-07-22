@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import { eliminarPersona, actualizarPersona } from "../../Redux/actions";
-import {
-  Table,
-  Popconfirm,
-  Form,
-  Input,
-  Button,
-  Select,
-  Typography,
-} from "antd";
+import { Table, Popconfirm, Form, Input, Button, Select } from "antd";
 import { useDispatch } from "react-redux";
 import {
   DeleteTwoTone,

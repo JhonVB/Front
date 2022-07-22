@@ -4,7 +4,6 @@ import {
   DELETE_PERSONA,
   UPDATE_PERSONA,
   CREATE_PERSONA_ERROR,
-  LOGEADO,
 } from "../Redux/actionsTypes";
 import axios from "../Service/Service";
 
@@ -66,11 +65,12 @@ export async function logear(info) {
   try {
     const { data } = await axios.post(`/token/`, info);
     localStorage.setItem("token", data.access);
+
+    console.log("data", data);
+
     setTimeout(() => {
       window.location = "http://localhost:3000/home";
     }, 600);
-
-    console.log("data", data);
   } catch (error) {
     console.log(error);
   }

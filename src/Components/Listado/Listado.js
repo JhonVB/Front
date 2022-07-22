@@ -45,7 +45,7 @@ function Listado({ personas }) {
 
   const columns = [
     {
-      title: "Name",
+      title: "NOMBRE",
       dataIndex: "name",
       key: "name",
       align: "center",
@@ -66,7 +66,7 @@ function Listado({ personas }) {
     },
 
     {
-      title: "Last Name",
+      title: "APPELIDO",
       dataIndex: "last_name",
       key: "last_name",
       align: "center",
@@ -88,7 +88,7 @@ function Listado({ personas }) {
       },
     },
     {
-      title: "Type Document",
+      title: "TIPO DE DOCUMENTO",
       dataIndex: "type_document",
       key: "type_document",
       align: "center",
@@ -118,7 +118,7 @@ function Listado({ personas }) {
       },
     },
     {
-      title: "Document",
+      title: "DOCUMENTO",
       dataIndex: "document",
       key: "document",
       align: "center",
@@ -145,7 +145,7 @@ function Listado({ personas }) {
     },
 
     {
-      title: "Hobbie",
+      title: "HOBBIE",
       dataIndex: "hobbie",
       key: "hobbie",
       align: "center",
@@ -173,7 +173,7 @@ function Listado({ personas }) {
       },
     },
     {
-      title: "Actions",
+      title: "ACCIONES",
       key: "acciones",
       align: "center",
       render: (_, record) => {

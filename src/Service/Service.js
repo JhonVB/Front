@@ -4,7 +4,11 @@ import { notification } from "antd";
 const customAxios = axios.create({
   baseURL: `http://localhost:8000/api`,
   timeout: 10000,
-  //   headers: { "api-key": "eyJz-CI6Ikp-4pWY-lhdCI6" },
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("token"),
+    "Content-Type": "application/json",
+    accept: "application/json",
+  },
 });
 
 const requestHandler = (request) => {
@@ -15,7 +19,7 @@ const requestHandler = (request) => {
 };
 
 const responseHandler = (response) => {
-  console.log(response);
+  console.log("response", response);
   if (
     response.status >= 200 &&
     response.status <= 299 &&
@@ -30,7 +34,7 @@ const responseHandler = (response) => {
 };
 
 const errorHandler = (error) => {
-  console.log("este si", error);
+  console.log("errores", error);
   if (error.response.status >= 400 && error.response.status <= 499) {
     notification["error"]({
       message: "Error",

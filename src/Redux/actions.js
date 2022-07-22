@@ -61,3 +61,11 @@ export function actualizarPersona(id, info) {
     });
   };
 }
+
+export async function logear(info) {
+  const { data } = await axios.post(`/token/`, info);
+
+  localStorage.setItem("token", data.access);
+
+  console.log("data", data);
+}

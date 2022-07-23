@@ -44,7 +44,7 @@ const errorHandler = (error) => {
   ) {
     notification["error"]({
       message: "Error ",
-      description: "Debes iniciar sesion / Usuario: usuario1 , Clave: 12345 ",
+      description: "Debes iniciar sesion / Usuario: admin , Clave: 12345 ",
     });
   }
 

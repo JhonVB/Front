@@ -24,8 +24,7 @@ function Formulario() {
       console.log("errorFormate", errorFormate);
       form.setFields(errorFormate);
     }
-    if (localStorage.getItem("token").length === 0)
-      navigate("https://ptcrud.vercel.app/");
+    if (localStorage.getItem("token").length === 0) navigate("/");
   }, [form, errores]);
 
   const onFinish = (values) => {
@@ -143,7 +142,7 @@ function Formulario() {
 
             <Form.Item wrapperCol={{ offset: 9, span: 16 }}>
               <Button type="primary" htmlType="submit">
-                Submit
+                Enviar
               </Button>
             </Form.Item>
           </Form>

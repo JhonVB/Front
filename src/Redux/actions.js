@@ -70,7 +70,7 @@ export async function logear(info) {
     console.log("data", data);
 
     setTimeout(() => {
-      window.location = "http://localhost:3000/home";
+      window.location = "https://ptcrud.vercel.app/home";
     }, 600);
   } catch (error) {
     console.log(error);

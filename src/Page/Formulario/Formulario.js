@@ -24,7 +24,8 @@ function Formulario() {
       console.log("errorFormate", errorFormate);
       form.setFields(errorFormate);
     }
-    if (localStorage.getItem("token").length === 0) navigate("/");
+    if (localStorage.getItem("token").length === 0)
+      navigate("https://ptcrud.vercel.app/");
   }, [form, errores]);
 
   const onFinish = (values) => {

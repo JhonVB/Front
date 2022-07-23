@@ -1,8 +1,9 @@
 import axios from "axios";
 import { notification } from "antd";
+const { URL } = process.env;
 
 const customAxios = axios.create({
-  baseURL: `http://localhost:8000/api`,
+  baseURL: `https://monkfish-app-wmwoj.ondigitalocean.app/api/`,
   timeout: 10000,
   headers: {
     Authorization: "Bearer " + localStorage.getItem("token"),
